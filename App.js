@@ -3,7 +3,6 @@ import { StyleSheet, Text, View} from 'react-native';
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base';
 import * as firebase from 'firebase';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import MainScreen from './Screens/MainScreen'
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -16,7 +15,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-class Home extends React.Component {
+export default class App extends React.Component {
 
   constructor(props) {
     super(props)
@@ -45,7 +44,7 @@ class Home extends React.Component {
   loginUser = (email, password) => {
     try {
       firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
-        console.log(user)
+        alert("Logged In.")
       })
       
     } catch (error) {
@@ -88,7 +87,7 @@ class Home extends React.Component {
             full
             rounded
             primary
-            onPress={() => this.props.navigation.navigate('MainScreen')}
+            onPress={() => this.signUpUser(this.state.email, this.state.password)}
           >
             <Text style={{ color: 'white' }}>Sign Up</Text>
           </Button>
@@ -96,24 +95,6 @@ class Home extends React.Component {
         </Form>
       </Container>
     );
-  }
-}
-
-const RootStack = createStackNavigator(
-  {
-    Home: Home,
-    MainScreen: MainScreen
-  },
-  {
-    initialRouteName: 'Home',
-  }
-);
-
-const AppContainer = createAppContainer(RootStack);
-
-export default class App extends React.Component {
-  render() {
-    return <AppContainer />;
   }
 }
 
