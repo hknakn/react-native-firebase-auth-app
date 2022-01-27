@@ -1,4 +1,4 @@
-# Firebase Login and Sign Up
+# Firebase Login and Sign Up App
 
 ##### This is a login and signup screen. Developed with React Native and using Firebase for authentication.    
 
